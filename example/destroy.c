@@ -5,6 +5,7 @@
 #define SEMAPHORE_NAME "/tmp/test.txt"
 int main()
 {
-    __SEM_DESTROY__(SEMAPHORE_NAME);
+    neoviki_semid_t sem_id = SEM_INIT(SEMAPHORE_NAME);
+    SEM_DESTROY(sem_id);
     return 0;
 }

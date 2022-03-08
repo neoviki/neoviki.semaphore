@@ -6,14 +6,13 @@
 int main()
 {
     int i;
-    neoviki_sem_t *sem =  SEM_OPEN(SEMAPHORE_NAME);
+    neoviki_semid_t sem_id =  SEM_INIT(SEMAPHORE_NAME);
     for(i=0;i<10;i++){
-        SEM_LOCK_UNTIL(sem, 10); 
+        SEM_LOCK(sem_id); 
         printf("reader\n");
         sleep(1);
-        SEM_UNLOCK(sem);
+        SEM_UNLOCK(sem_id);
     }
     
-    SEM_CLOSE(sem);
     return 0;
 }

@@ -1,4 +1,4 @@
-/* Inter Process Locks using Semaphore
+/* Inter Process Locks using System-V Semaphore
  *
  *
  *      Author  : Viki (a) Vignesh Natarajan
@@ -7,7 +7,7 @@
 
 #ifndef __NEOVIKI_SEM_LOCK_H__
 #define __NEOVIKI_SEM_LOCK_H__
-#include <semaphore.h>
+#define neoviki_semid_t int
 /*
 
 sem_name: 
@@ -17,20 +17,12 @@ sem_name:
     Ex: /tmp/test_app
 
 */
-typedef struct{
-    sem_t *ptr;
-    char  *name;
-}neoviki_sem_t;
 
-/* Destroy previous named semaphore and create new
- */
-
-neoviki_sem_t *SEM_CREATE (char *unique_name);
-neoviki_sem_t *SEM_OPEN   (char *unique_name);
-void SEM_LOCK       (neoviki_sem_t *sem);
-void SEM_LOCK_UNTIL (neoviki_sem_t *sem, int nsec);
-void SEM_UNLOCK     (neoviki_sem_t *sem);
-void SEM_CLOSE      (neoviki_sem_t *sem);
+/*return: sem_id*/
+neoviki_semid_t SEM_INIT (char *unique_name);
+void SEM_LOCK           (neoviki_semid_t sem_id);
+void SEM_UNLOCK         (neoviki_semid_t sem_id);
+void SEM_DESTROY        (neoviki_semid_t sem_id);
 
 #endif
 

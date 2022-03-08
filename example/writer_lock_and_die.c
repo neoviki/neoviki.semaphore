@@ -7,9 +7,9 @@
 int main()
 {
     int i;
-    neoviki_sem_t *sem = SEM_CREATE(SEMAPHORE_NAME);
+    neoviki_semid_t sem_id = SEM_INIT(SEMAPHORE_NAME);
     
-    SEM_LOCK(sem); 
+    SEM_LOCK(sem_id); 
     printf("writer\n");
     
     return 0;
